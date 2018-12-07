@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: rest-example
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        default_schema: test
+        jdbc:
+          lob:
+            non_contextual_creation: true
