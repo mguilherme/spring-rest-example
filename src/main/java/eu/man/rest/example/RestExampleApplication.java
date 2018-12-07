@@ -33,7 +33,18 @@ public class RestExampleApplication {
                     .description("My description 3")
                     .build();
 
-            orderRepository.saveAll(List.of(order1, order2, order3));
+            var order4 = Order.builder()
+                    .title("My title 4")
+                    .description("My description 4")
+                    .build();
+
+            var order5 = Order.builder()
+                    .title("My title 5")
+                    .description("My description 5")
+                    .build();
+
+
+            orderRepository.saveAll(List.of(order1, order2, order3, order4, order5));
 
             orderRepository.findAll()
                     .forEach(System.out::println);
