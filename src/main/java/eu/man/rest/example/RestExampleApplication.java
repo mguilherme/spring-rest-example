@@ -1,6 +1,7 @@
 package eu.man.rest.example;
 
 import eu.man.rest.example.order.Order;
+import eu.man.rest.example.order.Order.OrderDetail;
 import eu.man.rest.example.order.OrderRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,10 +22,17 @@ public class RestExampleApplication {
     public CommandLineRunner commandLineRunner(OrderRepository orderRepository) {
         return args -> {
 
+            var items = List.of("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten");
+
+            var orderDetails = List.of(new OrderDetail("My content 1", 1), new OrderDetail("My content 2", 2));
+
+
             var order1 = Order.builder()
                     .title("My title 1")
                     .description("My description 1")
                     .sensitiveData(UUID.randomUUID().toString())
+                    .numbers(items)
+                    .orderDetails(orderDetails)
                     .status(Order.OrderStatus.CREATED)
                     .build();
 
@@ -32,6 +40,8 @@ public class RestExampleApplication {
                     .title("My title 2")
                     .description("My description 2")
                     .sensitiveData(UUID.randomUUID().toString())
+                    .numbers(items)
+                    .orderDetails(orderDetails)
                     .status(Order.OrderStatus.CREATED)
                     .build();
 
@@ -39,6 +49,8 @@ public class RestExampleApplication {
                     .title("My title 3")
                     .description("My description 3")
                     .sensitiveData(UUID.randomUUID().toString())
+                    .numbers(items)
+                    .orderDetails(orderDetails)
                     .status(Order.OrderStatus.COMPLETED)
                     .build();
 
@@ -46,6 +58,7 @@ public class RestExampleApplication {
                     .title("My title 4")
                     .description("My description 4")
                     .sensitiveData(UUID.randomUUID().toString())
+                    .numbers(items)
                     .status(Order.OrderStatus.FAILED)
                     .build();
 
@@ -53,6 +66,7 @@ public class RestExampleApplication {
                     .title("My title 5")
                     .description("My description 5")
                     .sensitiveData(UUID.randomUUID().toString())
+                    .orderDetails(orderDetails)
                     .status(Order.OrderStatus.RUNNING)
                     .build();
 
