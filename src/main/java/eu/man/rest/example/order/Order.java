@@ -1,4 +1,4 @@
-package eu.man.rest.example;
+package eu.man.rest.example.order;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.hateoas.Identifiable;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -18,7 +19,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @Table(name = "orders")
 @EntityListeners(AuditingEntityListener.class)
-public class Order {
+public class Order implements Identifiable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,11 +29,23 @@ public class Order {
 
     private String description;
 
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
+
+    private String sensitiveData;
+
     @CreatedDate
     private Instant CreatedDate;
 
     @LastModifiedDate
     private Instant lastModifiedDate;
+
+    public enum OrderStatus {
+        CREATED,
+        RUNNING,
+        FAILED,
+        COMPLETED
+    }
 
 }
 

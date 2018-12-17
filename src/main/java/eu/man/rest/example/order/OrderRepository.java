@@ -1,4 +1,4 @@
-package eu.man.rest.example;
+package eu.man.rest.example.order;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
