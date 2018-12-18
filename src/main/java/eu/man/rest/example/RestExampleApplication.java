@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -23,7 +24,12 @@ public class RestExampleApplication {
     public CommandLineRunner commandLineRunner(OrderRepository orderRepository) {
         return args -> {
 
-            var items = List.of("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten");
+//            var items = List.of("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten");
+
+            List<String> items = new ArrayList<>();
+            items.add("one");
+            items.add("two");
+            items.add("three");
 
             var orderDetails = List.of(new OrderDetail("My content 1", 1), new OrderDetail("My content 2", 2));
 
@@ -37,6 +43,7 @@ public class RestExampleApplication {
                     .numbers(items)
                     .orderDetails(orderDetails)
                     .values(values)
+                    .action(new Order.Add("Add operation"))
                     .status(Order.OrderStatus.CREATED)
                     .build();
 
@@ -47,6 +54,7 @@ public class RestExampleApplication {
                     .numbers(items)
                     .orderDetails(orderDetails)
                     .values(values)
+                    .action(new Order.Remove("Remove operation", "first"))
                     .status(Order.OrderStatus.CREATED)
                     .build();
 
@@ -57,6 +65,7 @@ public class RestExampleApplication {
                     .numbers(items)
                     .orderDetails(orderDetails)
                     .values(values)
+                    .action(new Order.Add("Add operation"))
                     .status(Order.OrderStatus.COMPLETED)
                     .build();
 
@@ -65,6 +74,7 @@ public class RestExampleApplication {
                     .description("My description 4")
                     .sensitiveData(UUID.randomUUID().toString())
                     .numbers(items)
+                    .action(new Order.Remove("Remove operation", "second"))
                     .status(Order.OrderStatus.FAILED)
                     .build();
 
