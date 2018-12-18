@@ -16,6 +16,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Entity
@@ -53,6 +54,10 @@ public class Order implements Identifiable<Long> {
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
     private List<OrderDetail> orderDetails;
+
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "jsonb")
+    private Map<String, String> values;
 
     public enum OrderStatus {
         CREATED,

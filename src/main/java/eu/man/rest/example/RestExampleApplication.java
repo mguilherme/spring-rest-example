@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @SpringBootApplication
@@ -26,6 +27,8 @@ public class RestExampleApplication {
 
             var orderDetails = List.of(new OrderDetail("My content 1", 1), new OrderDetail("My content 2", 2));
 
+            var values = Map.of("key 1", "Value 1", "key 2", "Value 2");
+
 
             var order1 = Order.builder()
                     .title("My title 1")
@@ -33,6 +36,7 @@ public class RestExampleApplication {
                     .sensitiveData(UUID.randomUUID().toString())
                     .numbers(items)
                     .orderDetails(orderDetails)
+                    .values(values)
                     .status(Order.OrderStatus.CREATED)
                     .build();
 
@@ -42,6 +46,7 @@ public class RestExampleApplication {
                     .sensitiveData(UUID.randomUUID().toString())
                     .numbers(items)
                     .orderDetails(orderDetails)
+                    .values(values)
                     .status(Order.OrderStatus.CREATED)
                     .build();
 
@@ -51,6 +56,7 @@ public class RestExampleApplication {
                     .sensitiveData(UUID.randomUUID().toString())
                     .numbers(items)
                     .orderDetails(orderDetails)
+                    .values(values)
                     .status(Order.OrderStatus.COMPLETED)
                     .build();
 
@@ -67,6 +73,7 @@ public class RestExampleApplication {
                     .description("My description 5")
                     .sensitiveData(UUID.randomUUID().toString())
                     .orderDetails(orderDetails)
+                    .values(values)
                     .status(Order.OrderStatus.RUNNING)
                     .build();
 
