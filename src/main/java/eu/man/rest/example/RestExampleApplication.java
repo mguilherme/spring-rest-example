@@ -8,7 +8,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -24,17 +23,9 @@ public class RestExampleApplication {
     public CommandLineRunner commandLineRunner(OrderRepository orderRepository) {
         return args -> {
 
-//            var items = List.of("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten");
-
-            List<String> items = new ArrayList<>();
-            items.add("one");
-            items.add("two");
-            items.add("three");
-
+            var items = List.of("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten");
             var orderDetails = List.of(new OrderDetail("My content 1", 1), new OrderDetail("My content 2", 2));
-
             var values = Map.of("key 1", "Value 1", "key 2", "Value 2");
-
 
             var order1 = Order.builder()
                     .title("My title 1")
@@ -44,6 +35,12 @@ public class RestExampleApplication {
                     .orderDetails(orderDetails)
                     .values(values)
                     .action(new Order.Add("Add operation"))
+//                    .actions(List.of(
+//                            new Order.Add("Add operation 1"),
+//                            new Order.Add("Add operation 2"),
+//                            new Order.Remove("Remove operation 1", "other 1"),
+//                            new Order.Remove("Remove operation 2", "other 2")
+//                    ))
                     .status(Order.OrderStatus.CREATED)
                     .build();
 

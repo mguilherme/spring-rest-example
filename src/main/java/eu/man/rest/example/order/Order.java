@@ -1,6 +1,5 @@
 package eu.man.rest.example.order;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
@@ -65,6 +64,10 @@ public class Order implements Identifiable<Long> {
     @Column(columnDefinition = "jsonb")
     private Action action;
 
+//    @Type(type = "jsonb")
+//    @Column(columnDefinition = "jsonb")
+//    private List<Action> actions;
+
     public enum OrderStatus {
         CREATED,
         RUNNING,
@@ -81,12 +84,13 @@ public class Order implements Identifiable<Long> {
     }
 
     @JsonTypeInfo(
-            use = JsonTypeInfo.Id.NAME,
-            property = "type")
-    @JsonSubTypes({
-            @JsonSubTypes.Type(value = Add.class, name = "ADD"),
-            @JsonSubTypes.Type(value = Remove.class, name = "REMOVE")
-    })
+            use = JsonTypeInfo.Id.CLASS/*,
+//            include = As.PROPERTY,
+            property = "class"*/)
+//    @JsonSubTypes({
+//            @JsonSubTypes.Type(value = Add.class, name = "ADD"),
+//            @JsonSubTypes.Type(value = Remove.class, name = "REMOVE")
+//    })
     public interface Action extends Serializable {
         String getOperation();
     }
