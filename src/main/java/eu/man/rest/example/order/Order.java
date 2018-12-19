@@ -16,6 +16,7 @@ import org.springframework.hateoas.Identifiable;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -83,14 +84,7 @@ public class Order implements Identifiable<Long> {
         private Integer amount;
     }
 
-    @JsonTypeInfo(
-            use = JsonTypeInfo.Id.CLASS/*,
-//            include = As.PROPERTY,
-            property = "class"*/)
-//    @JsonSubTypes({
-//            @JsonSubTypes.Type(value = Add.class, name = "ADD"),
-//            @JsonSubTypes.Type(value = Remove.class, name = "REMOVE")
-//    })
+    @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
     public interface Action extends Serializable {
         String getOperation();
     }
@@ -99,9 +93,7 @@ public class Order implements Identifiable<Long> {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Add implements Action {
-
         private String operation;
-
     }
 
 
@@ -109,10 +101,8 @@ public class Order implements Identifiable<Long> {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Remove implements Action {
-
         private String operation;
         private String other;
-
     }
 
 }
