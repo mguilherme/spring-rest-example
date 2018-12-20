@@ -16,7 +16,6 @@ import org.springframework.hateoas.Identifiable;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -65,10 +64,6 @@ public class Order implements Identifiable<Long> {
     @Column(columnDefinition = "jsonb")
     private Action action;
 
-//    @Type(type = "jsonb")
-//    @Column(columnDefinition = "jsonb")
-//    private List<Action> actions;
-
     public enum OrderStatus {
         CREATED,
         RUNNING,
@@ -87,6 +82,8 @@ public class Order implements Identifiable<Long> {
     @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
     public interface Action extends Serializable {
         String getOperation();
+
+        Instant getTimestamp();
     }
 
     @Data
@@ -94,6 +91,7 @@ public class Order implements Identifiable<Long> {
     @AllArgsConstructor
     public static class Add implements Action {
         private String operation;
+        private Instant timestamp;
     }
 
 
@@ -103,6 +101,7 @@ public class Order implements Identifiable<Long> {
     public static class Remove implements Action {
         private String operation;
         private String other;
+        private Instant timestamp;
     }
 
 }

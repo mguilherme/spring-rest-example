@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -34,7 +35,7 @@ public class RestExampleApplication {
                     .numbers(items)
                     .orderDetails(orderDetails)
                     .values(values)
-                    .action(new Order.Add("Add operation"))
+                    .action(new Order.Add("Add operation", Instant.now()))
 //                    .actions(List.of(
 //                            new Order.Add("Add operation 1"),
 //                            new Order.Add("Add operation 2"),
@@ -51,7 +52,7 @@ public class RestExampleApplication {
                     .numbers(items)
                     .orderDetails(orderDetails)
                     .values(values)
-                    .action(new Order.Remove("Remove operation", "first"))
+                    .action(new Order.Remove("Remove operation", "first", Instant.now()))
                     .status(Order.OrderStatus.CREATED)
                     .build();
 
@@ -62,7 +63,7 @@ public class RestExampleApplication {
                     .numbers(items)
                     .orderDetails(orderDetails)
                     .values(values)
-                    .action(new Order.Add("Add operation"))
+                    .action(new Order.Add("Add operation", Instant.now()))
                     .status(Order.OrderStatus.COMPLETED)
                     .build();
 
@@ -71,7 +72,7 @@ public class RestExampleApplication {
                     .description("My description 4")
                     .sensitiveData(UUID.randomUUID().toString())
                     .numbers(items)
-                    .action(new Order.Remove("Remove operation", "second"))
+                    .action(new Order.Remove("Remove operation", "second", Instant.now()))
                     .status(Order.OrderStatus.FAILED)
                     .build();
 
