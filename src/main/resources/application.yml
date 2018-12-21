@@ -16,3 +16,6 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+
+  jackson:
+    default-property-inclusion: non_null

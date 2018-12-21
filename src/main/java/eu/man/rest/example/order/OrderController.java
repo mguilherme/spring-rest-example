@@ -20,9 +20,11 @@ public class OrderController {
     private final OrderResourceAssembler orderResourceAssembler;
 
     @GetMapping
-    public ResponseEntity<List<Order>> all() {
-        var orders = orderRepository.findAll();
-        return ResponseEntity.ok(orders);
+    public ResponseEntity<List<Resource>> all() {
+        var resources = orderResourceAssembler.toResources(orderRepository.findAll());
+        return ResponseEntity.ok(resources);
+//        var orders = orderRepository.findAll();
+//        return ResponseEntity.ok(orders);
     }
 
     @GetMapping("{id}")
