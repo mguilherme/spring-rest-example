@@ -28,12 +28,13 @@ public class OrderResourceAssembler extends ResourceAssemblerSupport<Order, Reso
         return resource;
     }
 
-    @Override
-    public List<Resource> toResources(Iterable<? extends Order> entities) {
-        return StreamSupport.stream(entities.spliterator(), false)
-                .map(this::toResource)
-                .collect(Collectors.toList());
-
-    }
+//    @Override
+//    public List<Resource> toResources(Iterable<? extends Order> entities) {
+//
+//        return StreamSupport.stream(entities.spliterator(), false)
+//                .map(this::toResource)
+//                .collect(Collectors.toList());
+//
+//    }
 
 }
