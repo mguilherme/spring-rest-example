@@ -3,9 +3,9 @@ spring:
     name: rest-example
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/test
-    username: postgres
-    password: postgres
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/test}
+    username: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:postgres}
 
   jpa:
     hibernate:

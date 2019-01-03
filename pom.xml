@@ -20,6 +20,8 @@
 
         <mapstruct.version>1.2.0.Final</mapstruct.version>
         <hibernate-types.version>2.4.0</hibernate-types.version>
+
+        <dockerfile-maven-version>1.4.9</dockerfile-maven-version>
     </properties>
 
     <dependencies>
@@ -86,11 +88,39 @@
     </dependencies>
 
     <build>
+
         <plugins>
+
+            <!--Spring Boot-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <!--Dockerfile maven plugin-->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>${dockerfile-maven-version}</version>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--<repository>spotify/foobar</repository>-->
+                    <repository>rest-example</repository>
+                    <tag>${project.version}</tag>
+                    <buildArgs>
+                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+                    </buildArgs>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
